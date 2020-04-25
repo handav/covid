@@ -17,6 +17,12 @@ for col in symptoms.columns:
 		'most_common_manifestation_over_weeks': symptoms[col].describe().top,
 		'most_common_manifestation_frequency': symptoms[col].describe().freq
 	}
-print(symptoms_to_json)
+
+# to refer to the json
+# print(symptoms_to_json)
+
+# to see the results in terminal 
+for symp in symptoms_to_json:
+	print(symp, '\n', symptoms_to_json[symp], '\n')
 
 
