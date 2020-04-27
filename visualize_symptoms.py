@@ -7,10 +7,8 @@ df = df.set_index('Symptom').transpose()
 
 ax = df.plot(kind='bar', subplots=True, layout=(25, 3), figsize=(20, 40))
 for i in range(0,len(ax)):
-	print('I', i)
 	for j in range(0, len(ax[0])):
 		try:
-			print('   J', j)
 			ax[i][j].get_legend().remove()
 		except:
 			continue
