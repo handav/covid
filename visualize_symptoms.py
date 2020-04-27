@@ -21,10 +21,11 @@ fig = ax[0][0].get_figure()
 fig.tight_layout()
 # Adjust spacing at top
 fig.subplots_adjust(top=0.99)
-plt.show()
-
 # Explot graph
 imagepath = 'capture.png'
 plt.savefig(imagepath)
+plt.show()
+
+
 
 
