@@ -15,7 +15,7 @@ for i in range(0,len(ax)):
 
 
 # Setting the values for all axes.
-custom_ylim = (0, 250)
+custom_ylim = (0, 275)
 plt.setp(ax, ylim=custom_ylim)
 fig = ax[0][0].get_figure()
 fig.tight_layout()
