@@ -2,3 +2,4 @@
 notes.txt
 clean*
 *.png
+.DS_Store

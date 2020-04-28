@@ -1,0 +1,1 @@
+'python norm.py' will generate .csv files and will also print out 'week_meta_info' which needs to be copy and pasted into 'visualize_symptoms' if the amount of people in the survey changes. 'python visualize_symptoms.py' will generate .png files of the week by week symptoms.
