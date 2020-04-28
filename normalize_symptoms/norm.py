@@ -11,6 +11,7 @@ week_dfs = []
 for i in range(0, 8):
 	week_dfs.append(df[df.Numberofweekswithsymptoms >= (i+1)])
 
+highest_count = 0
 i = 0
 for i, wdf in enumerate(week_dfs):
 	rows_for_csv = []
@@ -39,6 +40,9 @@ for i, wdf in enumerate(week_dfs):
 				week_string = 'Week ' + str(j)
 				filtered = wdf[(wdf[column].notnull() == True) & (wdf[column].astype(str).str.contains(week_string))]
 				symptom_by_week.append(len(filtered))
+				if float(len(filtered))/float(len(wdf[column])) > highest_count:
+					highest_count = float(len(filtered))/float(len(wdf[column]))
+					print(highest_count, week_string)
 			rows_for_csv.append(symptom_by_week)
 
 	csvtitle = 'Week_' + str(i+1) + '.csv'
@@ -49,4 +53,6 @@ for i, wdf in enumerate(week_dfs):
 
 print('week_meta_info:')
 print(week_meta_info)
+print('highest_count_percentage (feel free to take just a few decimals):')
+print(highest_count)
 

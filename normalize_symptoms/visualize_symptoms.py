@@ -2,8 +2,11 @@ import pandas as pd
 import json
 import matplotlib.pyplot as plt
 
-# this is copied and pasted from the terminal of norm.py 
+# this is copied and pasted from the terminal of norm.py, participants by week
 week_meta_info = {'1': 464, '2': 462, '3': 455, '4': 422, '5': 370, '6': 271, '7': 118, '8': 41}
+
+# sets the y axis as percentage of participants
+highest_count_percentage = 0.8
 
 for n in range(1, 9):
 	weeknum = n
@@ -25,7 +28,7 @@ for n in range(1, 9):
 
 
 	# Setting the values for all axes.
-	custom_ylim = (0, week_meta_info[str(weeknum)])
+	custom_ylim = (0, week_meta_info[str(weeknum)]*highest_count_percentage)
 	plt.setp(ax, ylim=custom_ylim)
 	fig = ax[0][0].get_figure()
 	fig.tight_layout()
