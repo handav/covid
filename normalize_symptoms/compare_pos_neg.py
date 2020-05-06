@@ -6,6 +6,10 @@ week_meta_info = {}
 
 df = pd.read_csv("5_2_roundedup.csv", skipinitialspace=True)
 
+neg = df[(df['COVID-19 Test '].astype(str).str.contains('I tested negative')) | (df['COVID-19 Test '].astype(str).str.contains('I have tested negative'))]
+pos = df[(df['COVID-19 Test '].astype(str).str.contains('I tested positive')) | (df['COVID-19 Test '].astype(str).str.contains('I have tested positive'))]
+
+print(df.size)
 symptom_text = "What kinds of symptoms have you been experiencing? Use the Week Columns to indicate in which week the symptom first appeared and check additional weeks to indicate how longs the symptoms persisted. For questions regarding severity, consider \"mild\" a 1-5 and \"severe\" a 6-10, on a scale of 10, where 1 is barely noticeable and 10 is needing emergency care. "
 symptom_columns = [col for col in df if symptom_text in col or 'Number of weeks sick' in col]
 df = df[symptom_columns]
@@ -55,7 +59,7 @@ for i, wdf in enumerate(week_dfs):
 					print(highest_count, week_string)
 			rows_for_csv.append(symptom_by_week)
 
-	csvtitle = 'Week_' + str(i+1) + '.csv'
+	csvtitle = 'Week_' + str(i+1) + 'negative_results.csv'
 	with open(csvtitle, 'w') as csvfile:
 		csvwriter = csv.writer(csvfile, delimiter=',')
 		for row in rows_for_csv:
