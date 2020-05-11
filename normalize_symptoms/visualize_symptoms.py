@@ -11,7 +11,7 @@ week_meta_info = {'1': 638, '2': 635, '3': 620, '4': 585, '5': 523, '6': 387, '7
 
 
 # sets the y axis as percentage of participants
-highest_count_percentage = 0.8
+highest_count_percentage = 0.6
 # make sure this is the same as norm.py
 num_weeks_to_look_at = 8
 
@@ -19,7 +19,7 @@ num_weeks_to_look_at = 8
 for n in range(1, num_weeks_to_look_at+1):
 	weeknum = n
 	week = "Week_" + str(weeknum)
-	csv_file = week + ".csv"
+	csv_file = week + "_bypercentage.csv"
 
 	df = pd.read_csv(csv_file, skipinitialspace=True)
 	df = df.sort_values(by=[week], ascending=False)
@@ -39,8 +39,10 @@ for n in range(1, num_weeks_to_look_at+1):
 				continue
 
 
-	# Setting the values for all axes.
-	custom_ylim = (0, week_meta_info[str(weeknum)]*highest_count_percentage)
+	# Setting the values for all axes. 
+	#custom_ylim = (0, week_meta_info[str(weeknum)]*highest_count_percentage)
+	# Setting the values for all axes for percentage
+	custom_ylim = (0, 100)
 	plt.setp(ax, ylim=custom_ylim)
 	fig = ax[0][0].get_figure()
 	fig.tight_layout()
@@ -48,7 +50,7 @@ for n in range(1, num_weeks_to_look_at+1):
 	fig.subplots_adjust(top=0.99)
 
 	# Export graph
-	imagepath = week + ".png"
+	imagepath = week + "_bypercentage.png"
 	print(imagepath)
 	plt.savefig(imagepath)
 

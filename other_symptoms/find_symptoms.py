@@ -13,18 +13,25 @@ stopwords = set(line.strip() for line in open('stopwords.txt'))
 #stopwords = stopwords.union(set(['mr','mrs','one','two','said']))
 
 symptom_row_index = -1
+description_row_index = -1
 with open('other_symptoms.csv', newline='') as csvfile:
 	spamreader = csv.reader(csvfile)
+	counter = 0
 	for row in spamreader:
 		if len(header) == 0:
 			header = row
 			for i, h in enumerate(header):
 				if 'cleaned_symptoms' in h:
-					print(i, h)
+					#print(i, h)
 					symptom_row_index = i
+				if 'List any' in h:
+					description_row_index = i
 		if len(row[symptom_row_index]) > 0:
 			for symp in row[symptom_row_index].split(','):
 				symptoms.append(symp.lower().strip())
+		if len(row[description_row_index]) > 40:
+			print(counter, row[description_row_index], '\n')
+			counter+=1
 
 #print(symptoms, len(symptoms))
 
@@ -33,33 +40,33 @@ with open('other_symptoms.csv', newline='') as csvfile:
 wordcount = {}
 # To eliminate duplicates, remember to split by punctuation, and use case demiliters.
 for word in symptoms:
-    #print(word)
-    word = word.replace(".","")
-    word = word.replace(",","")
-    word = word.replace(":","")
-    word = word.replace("\"","")
-    word = word.replace("!","")
-    word = word.replace("â€œ","")
-    word = word.replace("â€˜","")
-    word = word.replace("*","")
-    word = word.replace("(","")
-    word = word.replace(")","")
-    if word not in stopwords:
-        if word not in wordcount:
-            wordcount[word] = 1
-        else:
-            wordcount[word] += 1
+	#print(word)
+	word = word.replace(".","")
+	word = word.replace(",","")
+	word = word.replace(":","")
+	word = word.replace("\"","")
+	word = word.replace("!","")
+	word = word.replace("â€œ","")
+	word = word.replace("â€˜","")
+	word = word.replace("*","")
+	word = word.replace("(","")
+	word = word.replace(")","")
+	if word not in stopwords:
+		if word not in wordcount:
+			wordcount[word] = 1
+		else:
+			wordcount[word] += 1
 	#         print(word)
 	# print(a)
 	# print('\n')
 
-print(len(set(symptoms)))
+# print(len(set(symptoms)))
 
-# Print most common word
-n_print = int(input("How many most common words to print: "))
-print("\nOK. The {} most common words are as follows\n".format(n_print))
-word_counter = collections.Counter(wordcount)
-for word, count in word_counter.most_common(n_print):
-    print(word, ": ", count)
+# # Print most common word
+# n_print = int(input("How many most common words to print: "))
+# print("\nOK. The {} most common words are as follows\n".format(n_print))
+# word_counter = collections.Counter(wordcount)
+# for word, count in word_counter.most_common(n_print):
+#     print(word, ": ", count)
 
 

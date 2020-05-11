@@ -4,3 +4,7 @@ clean*
 *.png
 .DS_Store
 *.zip
+*.numbers
+cluster/
+reformat_spreadsheet/
+temp_scripts/
